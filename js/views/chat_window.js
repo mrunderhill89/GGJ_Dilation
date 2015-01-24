@@ -36,6 +36,6 @@ define(['jquery', 'backbone_streams', 'models/station'], function(
         },
         render: function(){
         }
-    })
+    });
     return ChatWindowView;
-})
+});
