@@ -6,7 +6,12 @@
         <script data-main="js/main" src="js/libs/require/require.js"></script>
         <div id="chat_window" style="width:20%;display:block">
             <textarea id="messages" rows=10 readonly=true></textarea><br>
-            <input id="send"></input>
+            <select id="receiver">
+                  <option value="nobody">[Select Chat Target]</option>
+            </select>
+            <input id="send_text"></input>
+            <input type="button" id="send_button" value="Send"></input>
+            Latency: <input id="latency" value="0.0ms" readonly=true>
         </div>
         <div id="view">Loading...</div>
     </body>

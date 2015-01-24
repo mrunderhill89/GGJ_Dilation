@@ -1,12 +1,13 @@
 define(['backbone_streams'], function(Backbone){
     var Message = Backbone.Model.extend({
         defaults:{
-            to: null,
-            from: null,
-            sent: 0.0,
+            from: "CATS:",
             received: 0.0,
             content: ""
-        }
+        },
+        fetch: function(){},
+        save: function(){},
+        load: function(){}
     });
     return Message;
 })
