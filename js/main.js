@@ -20,12 +20,14 @@ require.config({
     }
 });
 
-require(['jquery', 'pixi', 'models/station'],
-    function($, Pixi, Station){
-        var stage = new Pixi.Stage(0x66FF99);
+require(['jquery', 'pixi', 'views/ship_common'],
+    function($, Pixi, ShipCommonView){
+        var stage = new Pixi.Stage(0x403B34);
         var renderer = Pixi.autoDetectRenderer(800,600);
         $("#view").empty().append(renderer.view);
-        
+        var ship_view = new ShipCommonView({}).render();
+        console.log(ship_view.sprites);
+        stage.addChild(ship_view.el);
         requestAnimFrame(main_loop);
         function main_loop(){
             requestAnimFrame(main_loop);

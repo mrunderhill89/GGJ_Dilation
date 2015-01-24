@@ -42,6 +42,7 @@
             new_stream: new Bacon.Bus(),
             all: new Bacon.Bus()
         });
+            this._streams.all._unsubs = [];
       },
       stream: function(name, stream){
         this.init_streams();
@@ -49,9 +50,9 @@
         if (!s){
             s = this._streams[name] = (stream || new Bacon.Bus());
             s._unsubs = [];
-            s.onValue(function(){
-                this.stream("all").push({stream:s, name:name, result:arguments});
-            }.bind(this));
+            /*s.onValue(function(){
+                this.stream("all").push([name, stream, arguments]);
+            }.bind(this));*/
             this._streams.new_stream.push({stream:s,name:name});
         }
         return s;
@@ -65,8 +66,8 @@
     on: function(name, callback, context) {
       if (!eventsApi(this, 'on', name, [callback, context]) || !callback) return this;
         var stream = this.stream(name);
-        var wrap = function(){
-            var result = callback.apply(this,arguments);
+        var wrap = function(args){
+            var result = callback.apply(this,args);
             if (result === Bacon.noMore){
                 this.off(name, wrap);
             }
@@ -121,10 +122,16 @@
     // (unless you're listening on `"all"`, which will cause your callback to
     // receive the true name of the event as the first argument).
     trigger: function(name) {
+      if(!_.isString(name)){
+          throw("Trigger needs a string for its stream name. Got "+name+" instead.")
+      }
+      if (name === "request"){
+          throw("");
+      }
       var args = [].slice.call(arguments, 1);
       if (!eventsApi(this, 'trigger', name, args)) return this;
       var stream = this.stream(name);
-      stream.push.apply(stream,args);
+      stream.push(args);
       return this;
     },
 

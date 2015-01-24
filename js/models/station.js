@@ -28,28 +28,40 @@ define(['underscore','backbone_streams'], function(_, Backbone){
     }
     var Station = Backbone.Model.extend({
         initialize: function(params){
-            this.dilation_rate = this.stream("dilation_rate").toProperty(params.dilation_rate || 1.0);
+            this.dilation_rate = this.stream("dilation_rate").toProperty(params.dilation_rate || this.get("dilation_rate"));
             this.dilation_rate.onValue(function(dr){this.set("dilation_rate", dr)}.bind(this));
 
             this.relative_time = this.dilation_rate
                 .sampledBy(this.stream("dt"), function(dr, dt){return {r:dr, t:dt};})
-                .scan(params.relative_time || 0.0, function(rt, d){
+                .scan(params.relative_time || this.get("relative_time"), function(rt, d){
                     return rt + (d.r * d.t);
                 });
             this.relative_time.onValue(function(rt){
                 this.set("relative_time", rt);
-            });
+            }.bind(this));
+            /* Leave this alone for now.
             this.messages = this.relative_time
                 .sampledBy(this.stream("messages"), function(t, msg){return {t:t, msg:msg};}) //Every time we get a message, check the time.
                 .filter(function(tm){return tm.t < tm.msg.get("received")}).map(".msg") //Ignore messages that go backwards in time.
-                .scan([], function(messages, msg){
+                .scan(params.messages || this.get("messages"), function(messages, msg){
                     place_message(msg,messages);
                     return messages;
                 });
             this.messages.onValue(messages){
                 this.set("messages", messages);
             }
-        }
+            this.messages.sampledBy(this.relative_time, function(messages, rt){
+                
+            })*/
+        },
+        defaults:{
+            dilation_rate: 1.0,
+            relative_time: 0.0,
+            messages: []
+        },
+        fetch: function(){},
+        save: function(){},
+        load: function(){}
     });
     return Station;
 })
