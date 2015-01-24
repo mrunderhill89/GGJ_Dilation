@@ -4,29 +4,37 @@ define(['underscore', 'backbone_streams','pixi',
         Ship
        ){
     var xy_pairings = {
-        command: {x: 75, y:25},
-        sensors: {x: 50, y: 75},
-        life_support: {x:100, y: 75},
-        left_engine:{x:25,y:125},
-        power_core:{x:75,y:125},
-        right_engine:{x:125,y:125}
-    }
+        command: {x: 75, y:225},
+        sensors: {x: 50, y: 275},
+        shields: {x:100, y: 275},
+        left_engine:{x:25,y:325},
+        power_core:{x:75,y:325},
+        right_engine:{x:125,y:325}
+    };
     var station_properties = {
         width: 50,
         height: 50,
         fill_color: 0xFFFFFF,
         line_color: 0x000000,
         line_width: 5,
+    };
+    function componentToHex(c) {
+        var hex = Math.floor(c*255).toString(16);
+        return hex.length == 1 ? "0" + hex : hex;
+    }
+
+    function rgbToHex(r, g, b) {
+        return "0x" + componentToHex(r) + componentToHex(g) + componentToHex(b);
     }
     var ShipCommonView = Backbone.View.extend({
         initialize: function(params){
             //Create a Pixi stage and set the renderer.
             this.stage = new Pixi.Stage(0x403B34);
-            this.renderer = Pixi.autoDetectRenderer(200,200);
+            this.renderer = Pixi.autoDetectRenderer(800,600);
             this.ship = params.ship || new Ship(params);
             this.stream("dt").onValue(function(dt){
                 this.renderer.render(this.stage);
-            }.bind(this))
+            }.bind(this));
             if (params.update){
                 this.stream("dt").plug(params.update);
             }
@@ -47,15 +55,23 @@ define(['underscore', 'backbone_streams','pixi',
                 group.addChild(label);
                 
                 this.ship[name].relative_time.onValue(function(rt){
-                    label.setText(Math.floor(rt)/1000);
-                })
-                
+                    label.setText(Math.floor(rt/10)/100);
+                });
+                this.ship[name].dilation_rate.onValue(function(dr){
+                    //Red is constant, so reduce green and blue as dilation gets worse.
+                    var value = Math.pow(dr,2.0);
+                    var color = rgbToHex(1.0, value,value);
+                    box.clear();
+                    box.beginFill(color);
+                    box.lineStyle(station_properties.line_width, station_properties.line_color);
+                    box.drawRect(coords.x, coords.y, station_properties.width, station_properties.height);
+                });
                 this.stage.addChild(group);
                 return group;
             }.bind(this));
             this.$el.empty().append(this.renderer.view);
             return this;
         }
-    })
+    });
     return ShipCommonView;
-})
+});

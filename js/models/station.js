@@ -8,7 +8,7 @@ define(['underscore','backbone_streams', 'collections/inbox'], function(_, Backb
                 if (!_.isNaN(dt))
                     return t + dt;
                 return t;
-            })
+            });
             this.relative_time.onValue(function(rt){
                 this.set("relative_time", rt);
             }.bind(this));
@@ -17,7 +17,7 @@ define(['underscore','backbone_streams', 'collections/inbox'], function(_, Backb
             if (params.messages){
                 _.each(params.messages, function(msg){
                     this.inbox.create(msg);
-                }.bind(this))
+                }.bind(this));
             }
         },
         defaults:{
