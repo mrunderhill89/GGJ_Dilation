@@ -20,8 +20,10 @@ require.config({
     }
 });
 
-require(['jquery', 'pixi', 'bacon', 'views/ship_common'],
-    function($, Pixi, Bacon, ShipCommonView){
+require(['jquery', 'pixi', 'bacon', 
+         'collections/ship',
+         'views/ship_common','views/chat_window'],
+    function($, Pixi, Bacon, Ship, ShipCommonView, ChatWindowView){
 
     //Create a "real time" stream to pass time values to from the main loop.
         var real_time = new Bacon.Bus();
@@ -31,8 +33,16 @@ require(['jquery', 'pixi', 'bacon', 'views/ship_common'],
             return memo;
         }).map(".dt");
     //Create the main view and attach it to the stage.
+        var ship = new Ship({update:dt});
         var ship_view = new ShipCommonView({
             el: "#view",
+            update: dt,
+            ship: ship
+        }).render();
+    //Create the chat window view and attach to the HTML
+        var chat_window = new ChatWindowView({
+            el:"#chat_window",
+            station: ship.command,
             update: dt
         }).render();
     //Set the main loop

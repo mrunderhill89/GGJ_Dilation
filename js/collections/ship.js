@@ -10,19 +10,41 @@ define(['underscore', 'backbone_streams', 'bacon',
         //this.routes = new Backbone.Collection({model:Route});
         //Set up our initial ship.
         this.command = this.stations.create({
-            dilation_rate: 0.8
+            dilation_rate: 0.6,
+            messages:[
+                {
+                    received:0.0,
+                    content:"How are you, gentlemen!!"
+                },
+                {
+                    received:5000.0,
+                    content:"All your base are belong to us."
+                },
+                {
+                    received:10000.0,
+                    content:"You are on the way to destruction."
+                },
+                {
+                    received:20000.0,
+                    content:"You have no chance to survive make your time."
+                },
+                {
+                    received:30000.0,
+                    content:"Ha ha ha ha"
+                },
+            ]
         });
         this.sensors = this.stations.create({
-            dilation_rate: 0.8
+            dilation_rate: 0.6
         });
         this.life_support = this.stations.create({
-            dilation_rate: 0.9
+            dilation_rate: 0.8
         });
         this.power_core = this.stations.create({
-            dilation_rate: 0.9
+            dilation_rate: 0.8,
         });
         this.left_engine = this.stations.create({
-            dilation_rate: 0.8
+            dilation_rate: 0.6
         });
         this.right_engine = this.stations.create({
             dilation_rate: 1.0
