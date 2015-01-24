@@ -3,7 +3,7 @@ define(['underscore', 'backbone_streams',
     var Stations = Backbone.Collection.extend({
         model:Station, 
         url: '/', //Not using a server yet.
-    })
+    });
     function Ship(){
         this.stations = new Stations({});
         //this.routes = new Backbone.Collection({model:Route});
@@ -28,4 +28,4 @@ define(['underscore', 'backbone_streams',
         });
     }
     return Ship;
-})
+});
