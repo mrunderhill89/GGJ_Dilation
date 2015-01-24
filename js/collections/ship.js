@@ -1,10 +1,11 @@
-define(['underscore', 'backbone_streams',
-       'models/station'],function(_, Backbone, Station){
+define(['underscore', 'backbone_streams', 'bacon',
+       'models/station'],function(_, Backbone, Bacon, Station){
     var Stations = Backbone.Collection.extend({
         model:Station, 
         url: '/', //Not using a server yet.
     })
-    function Ship(){
+    function Ship(params){
+        params || (params = {});
         this.stations = new Stations({});
         //this.routes = new Backbone.Collection({model:Route});
         //Set up our initial ship.
@@ -26,6 +27,8 @@ define(['underscore', 'backbone_streams',
         this.right_engine = this.stations.create({
             dilation_rate: 1.0
         });
+        //Set the player in the command center first
+        this.player_station = this.command;
     }
     return Ship;
 })

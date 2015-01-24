@@ -20,19 +20,29 @@ require.config({
     }
 });
 
-require(['jquery', 'pixi', 'views/ship_common'],
-    function($, Pixi, ShipCommonView){
+require(['jquery', 'pixi', 'bacon', 'views/ship_common'],
+    function($, Pixi, Bacon, ShipCommonView){
+    //Create a Pixi stage and set the renderer.
         var stage = new Pixi.Stage(0x403B34);
         var renderer = Pixi.autoDetectRenderer(800,600);
         $("#view").empty().append(renderer.view);
-        var ship_view = new ShipCommonView({}).render();
-        console.log(ship_view.sprites);
+    //Create a "real time" stream to pass time values to from the main loop.
+        var real_time = new Bacon.Bus();
+        var dt = real_time.scan({}, function(memo, time){
+            memo.dt = memo.time? time-memo.time:0;
+            return memo;
+        }).map(".dt");
+    //Create the main view and attach it to the stage.
+        var ship_view = new ShipCommonView({
+            update: dt
+        }).render();
         stage.addChild(ship_view.el);
+    //Set the main loop
         requestAnimFrame(main_loop);
         function main_loop(){
             requestAnimFrame(main_loop);
+            real_time.push(performance.now());
             renderer.render(stage);
-            console.log(performance.now());
         }
     }
 );

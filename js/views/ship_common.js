@@ -11,22 +11,39 @@ define(['underscore', 'backbone_streams','pixi',
         power_core:{x:400,y:400},
         right_engine:{x:500,y:400}
     }
-
+    var station_properties = {
+        width: 80,
+        height: 80,
+        fill_color: 0xFFFFFF,
+        line_color: 0x000000,
+        line_width: 5,
+    }
     var ShipCommonView = Backbone.View.extend({
         initialize: function(params){
             this.el = new Pixi.DisplayObjectContainer();
-            this.ship = params.ship || new Ship();
+            this.ship = params.ship || new Ship(params);
         },
         render: function(){
             this.sprites = _.map(xy_pairings, function(coords, name){
-                var graphics = new Pixi.Graphics();
-                graphics.beginFill(0xFFFFFF);
-                // set the line style to have a width of 5 and set the color to red
-                graphics.lineStyle(5, 0x000000);
-                // draw a rectangle
-                graphics.drawRect(coords.x, coords.y, 100, 100);
-                this.el.addChild(graphics);
-                return graphics;
+                var group = new Pixi.DisplayObjectContainer();
+                
+                var box = new Pixi.Graphics();
+                box.beginFill(station_properties.fill_color);
+                box.lineStyle(station_properties.line_width, station_properties.line_color);
+                box.drawRect(coords.x, coords.y, station_properties.width, station_properties.height);
+                group.addChild(box);
+                
+                var label = new Pixi.Text(name, {font:"14px Arial", fill:"black"});
+                label.position.x = coords.x+5;
+                label.position.y = coords.y+5;
+                group.addChild(label);
+                
+                this.ship[name].relative_time.onValue(function(rt){
+                    label.setText(rt);
+                })
+                
+                this.el.addChild(group);
+                return group;
             }.bind(this));
             return this;
         }
