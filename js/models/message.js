@@ -3,7 +3,7 @@ define(['backbone_streams'], function(Backbone){
         defaults:{
             from: "CATS",
             received: 0.0,
-            content: ""
+            change_view: null
         },
         fetch: function(){},
         save: function(){},

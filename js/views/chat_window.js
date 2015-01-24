@@ -27,7 +27,10 @@ define(['jquery', 'backbone_streams', 'models/station'], function(
             output.onValue(function(messages){
                 message_box.empty();                
                 _.each(messages, function(msg){
-                    message_box.append(msg.get("from")+" @("+(Math.floor(msg.get("received"))/1000).toFixed(4)+"):\n"+msg.get("content")+"\n");
+                    var content = msg.get("content");
+                    if (content){
+                        message_box.append(msg.get("from")+" @("+(Math.floor(msg.get("received"))/1000).toFixed(4)+"):\n"+msg.get("content")+"\n");
+                    }
                 })
             })
         },

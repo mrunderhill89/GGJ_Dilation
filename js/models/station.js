@@ -23,6 +23,7 @@ define(['underscore','backbone_streams', 'collections/inbox'], function(_, Backb
         defaults:{
             dilation_rate: 1.0,
             relative_time: 0.0,
+            power: 1.0,
             messages: []
         },
         fetch: function(){},

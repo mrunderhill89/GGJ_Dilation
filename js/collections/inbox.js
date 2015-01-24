@@ -31,6 +31,10 @@ define(['backbone_streams','models/message'], function(Backbone, Message){
         initialize: function(params){
             
         },
+        place: function(model){
+            place_message(model, this.models);
+            return this;
+        },
         model: Message,
         url: '/', //Not using a server yet.
     });
