@@ -13,19 +13,19 @@ define(['underscore', 'backbone_streams', 'bacon',
             dilation_rate: 0.6,
             messages:[
                 {
-                    received:0.0,
+                    received:100.0,
                     content:"How are you, gentlemen!!"
                 },
                 {
-                    received:5000.0,
+                    received:5500.0,
                     content:"All your base are belong to us."
                 },
                 {
-                    received:10000.0,
+                    received:10100.0,
                     content:"You are on the way to destruction."
                 },
                 {
-                    received:20000.0,
+                    received:22222.0,
                     content:"You have no chance to survive make your time."
                 },
                 {
