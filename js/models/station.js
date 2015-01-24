@@ -13,9 +13,7 @@ define(['underscore','backbone_streams', 'collections/inbox'], function(_, Backb
                 this.set("relative_time", rt);
             }.bind(this));
             
-            this.inbox = new Inbox({
-                time: this.relative_time
-            });
+            this.inbox = new Inbox();
             if (params.messages){
                 _.each(params.messages, function(msg){
                     this.inbox.create(msg);

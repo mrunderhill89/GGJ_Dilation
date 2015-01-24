@@ -1,7 +1,7 @@
 define(['backbone_streams'], function(Backbone){
     var Message = Backbone.Model.extend({
         defaults:{
-            from: "CATS:",
+            from: "CATS",
             received: 0.0,
             content: ""
         },

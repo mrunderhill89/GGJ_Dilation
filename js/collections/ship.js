@@ -17,19 +17,19 @@ define(['underscore', 'backbone_streams', 'bacon',
                     content:"How are you, gentlemen!!"
                 },
                 {
-                    received:5.0,
+                    received:5000.0,
                     content:"All your base are belong to us."
                 },
                 {
-                    received:10.0,
+                    received:10000.0,
                     content:"You are on the way to destruction."
                 },
                 {
-                    received:20.0,
+                    received:20000.0,
                     content:"You have no chance to survive make your time."
                 },
                 {
-                    received:30.0,
+                    received:30000.0,
                     content:"Ha ha ha ha"
                 },
             ]
