@@ -4,12 +4,12 @@ define(['underscore', 'backbone_streams','pixi',
         Ship
        ){
     var xy_pairings = {
-        command: {x: 75, y:25},
-        sensors: {x: 50, y: 75},
-        shields: {x:100, y: 75},
-        left_engine:{x:25,y:125},
-        power_core:{x:75,y:125},
-        right_engine:{x:125,y:125}
+        command: {x: 75, y:225},
+        sensors: {x: 50, y: 275},
+        shields: {x:100, y: 275},
+        left_engine:{x:25,y:325},
+        power_core:{x:75,y:325},
+        right_engine:{x:125,y:325}
     }
     var station_properties = {
         width: 50,
@@ -30,7 +30,7 @@ define(['underscore', 'backbone_streams','pixi',
         initialize: function(params){
             //Create a Pixi stage and set the renderer.
             this.stage = new Pixi.Stage(0x403B34);
-            this.renderer = Pixi.autoDetectRenderer(200,200);
+            this.renderer = Pixi.autoDetectRenderer(800,600);
             this.ship = params.ship || new Ship(params);
             this.stream("dt").onValue(function(dt){
                 this.renderer.render(this.stage);
