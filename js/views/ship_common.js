@@ -20,8 +20,16 @@ define(['underscore', 'backbone_streams','pixi',
     }
     var ShipCommonView = Backbone.View.extend({
         initialize: function(params){
-            this.el = new Pixi.DisplayObjectContainer();
+            //Create a Pixi stage and set the renderer.
+            this.stage = new Pixi.Stage(0x403B34);
+            this.renderer = Pixi.autoDetectRenderer(800,600);
             this.ship = params.ship || new Ship(params);
+            this.stream("dt").onValue(function(dt){
+                this.renderer.render(this.stage);
+            }.bind(this))
+            if (params.update){
+                this.stream("dt").plug(params.update);
+            }
         },
         render: function(){
             this.sprites = _.map(xy_pairings, function(coords, name){
@@ -42,9 +50,10 @@ define(['underscore', 'backbone_streams','pixi',
                     label.setText(Math.floor(rt)/1000);
                 })
                 
-                this.el.addChild(group);
+                this.stage.addChild(group);
                 return group;
             }.bind(this));
+            this.$el.empty().append(this.renderer.view);
             return this;
         }
     })
