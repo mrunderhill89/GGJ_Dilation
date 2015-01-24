@@ -18,6 +18,14 @@ define(['underscore', 'backbone_streams','pixi',
         line_color: 0x000000,
         line_width: 5,
     }
+    function componentToHex(c) {
+        var hex = Math.floor(c*255).toString(16);
+        return hex.length == 1 ? "0" + hex : hex;
+    }
+
+    function rgbToHex(r, g, b) {
+        return "0x" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    }
     var ShipCommonView = Backbone.View.extend({
         initialize: function(params){
             //Create a Pixi stage and set the renderer.
@@ -49,7 +57,15 @@ define(['underscore', 'backbone_streams','pixi',
                 this.ship[name].relative_time.onValue(function(rt){
                     label.setText(Math.floor(rt)/1000);
                 })
-                
+                this.ship[name].dilation_rate.onValue(function(dr){
+                    //Red is constant, so reduce green and blue as dilation gets worse.
+                    var value = Math.pow(dr,2.0);
+                    var color = rgbToHex(1.0, value,value);
+                    box.clear();
+                    box.beginFill(color);
+                    box.lineStyle(station_properties.line_width, station_properties.line_color);
+                    box.drawRect(coords.x, coords.y, station_properties.width, station_properties.height);
+                });
                 this.stage.addChild(group);
                 return group;
             }.bind(this));
