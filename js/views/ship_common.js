@@ -6,7 +6,7 @@ define(['underscore', 'backbone_streams','pixi',
     var xy_pairings = {
         command: {x: 75, y:25},
         sensors: {x: 50, y: 75},
-        life_support: {x:100, y: 75},
+        shields: {x:100, y: 75},
         left_engine:{x:25,y:125},
         power_core:{x:75,y:125},
         right_engine:{x:125,y:125}
@@ -55,7 +55,7 @@ define(['underscore', 'backbone_streams','pixi',
                 group.addChild(label);
                 
                 this.ship[name].relative_time.onValue(function(rt){
-                    label.setText(Math.floor(rt)/1000);
+                    label.setText(Math.floor(rt/10)/100);
                 })
                 this.ship[name].dilation_rate.onValue(function(dr){
                     //Red is constant, so reduce green and blue as dilation gets worse.

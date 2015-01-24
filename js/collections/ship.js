@@ -37,11 +37,11 @@ define(['underscore', 'backbone_streams', 'bacon',
         this.sensors = this.stations.create({
             dilation_rate: 0.6
         });
-        this.life_support = this.stations.create({
+        this.shields = this.stations.create({
             dilation_rate: 0.8
         });
         this.power_core = this.stations.create({
-            dilation_rate: 0.8,
+            dilation_rate: 0.6,
         });
         this.left_engine = this.stations.create({
             dilation_rate: 0.6
