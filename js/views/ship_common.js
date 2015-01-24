@@ -10,14 +10,14 @@ define(['underscore', 'backbone_streams','pixi',
         left_engine:{x:25,y:325},
         power_core:{x:75,y:325},
         right_engine:{x:125,y:325}
-    }
+    };
     var station_properties = {
         width: 50,
         height: 50,
         fill_color: 0xFFFFFF,
         line_color: 0x000000,
         line_width: 5,
-    }
+    };
     function componentToHex(c) {
         var hex = Math.floor(c*255).toString(16);
         return hex.length == 1 ? "0" + hex : hex;
@@ -34,7 +34,7 @@ define(['underscore', 'backbone_streams','pixi',
             this.ship = params.ship || new Ship(params);
             this.stream("dt").onValue(function(dt){
                 this.renderer.render(this.stage);
-            }.bind(this))
+            }.bind(this));
             if (params.update){
                 this.stream("dt").plug(params.update);
             }
@@ -56,7 +56,7 @@ define(['underscore', 'backbone_streams','pixi',
                 
                 this.ship[name].relative_time.onValue(function(rt){
                     label.setText(Math.floor(rt/10)/100);
-                })
+                });
                 this.ship[name].dilation_rate.onValue(function(dr){
                     //Red is constant, so reduce green and blue as dilation gets worse.
                     var value = Math.pow(dr,2.0);
@@ -72,6 +72,6 @@ define(['underscore', 'backbone_streams','pixi',
             this.$el.empty().append(this.renderer.view);
             return this;
         }
-    })
+    });
     return ShipCommonView;
-})
+});

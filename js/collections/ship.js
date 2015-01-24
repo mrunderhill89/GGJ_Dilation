@@ -3,7 +3,7 @@ define(['underscore', 'backbone_streams', 'bacon',
     var Stations = Backbone.Collection.extend({
         model:Station, 
         url: '/', //Not using a server yet.
-    })
+    });
     function Ship(params){
         params || (params = {});
         this.stations = new Stations({});
@@ -62,9 +62,9 @@ define(['underscore', 'backbone_streams', 'bacon',
                 this.stations.each(function(station){
                     var rdt = dt * station.get("dilation_rate") / player_dilation;
                     station.stream("dt").push(rdt);
-                })
+                });
             }
-        }.bind(this))
+        }.bind(this));
     }
     return Ship;
 });

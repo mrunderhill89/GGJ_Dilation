@@ -28,11 +28,11 @@ define(['jquery', 'backbone_streams', 'models/station'], function(
                 message_box.empty();                
                 _.each(messages, function(msg){
                     message_box.append(msg.get("from")+" @("+(Math.floor(msg.get("received"))/1000).toFixed(4)+"):\n"+msg.get("content")+"\n");
-                })
-            })
+                });
+            });
         },
         render: function(){
         }
-    })
+    });
     return ChatWindowView;
-})
+});
