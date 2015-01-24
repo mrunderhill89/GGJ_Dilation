@@ -6,8 +6,30 @@
         <script data-main="js/main" src="js/libs/require/require.js"></script>
         <div id="chat_window" style="width:20%;display:block">
             <textarea id="messages" rows=10 readonly=true></textarea><br>
-            <input id="send"></input>
+            <table>
+            	<form id="newmsgform">
+           			<tr>
+           				<td><select id="reciever">
+            					<!--
+            						Captain value for other role's views
+            						<option value= "captain">Captain</option>
+            					-->
+            					<option value= "sensors">Sensors</option>
+           						<option value= "shields">Shields</option>
+           						<option value= "power">Power Core</option>
+           						<option value= "lengine">Left Engine</option>
+      							<option value= "rengine">Right Engine</option>
+       						</select></td>
+           				<td><input id="send_text"></input></td>
+           				<td><input type="button" id="send_button" value="Send"></input></td>
+           			</tr>
+           			<tr>
+           				<td align="right">Latency:</td>
+           				<td> <input id="latency" value="0.0ms" readonly=true></td>
+           			</tr>
+            	</form>
         </div>
+            </table>
         <div id="view">Loading...</div>
     </body>
 </html>
