@@ -64,4 +64,4 @@ define(['underscore','backbone_streams'], function(_, Backbone){
         load: function(){}
     });
     return Station;
-})
+});

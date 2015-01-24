@@ -31,4 +31,4 @@ define(['underscore', 'backbone_streams', 'bacon',
         this.player_station = this.command;
     }
     return Ship;
-})
+});
