@@ -30,6 +30,7 @@ require(['jquery', 'pixi', 'bacon', 'views/ship_common'],
         var real_time = new Bacon.Bus();
         var dt = real_time.scan({}, function(memo, time){
             memo.dt = memo.time? time-memo.time:0;
+            memo.time = time;
             return memo;
         }).map(".dt");
     //Create the main view and attach it to the stage.

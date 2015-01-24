@@ -28,7 +28,21 @@ define(['underscore', 'backbone_streams', 'bacon',
             dilation_rate: 1.0
         });
         //Set the player in the command center first
-        this.player_station = this.command;
+        var player_station = this.player_station = this.command;
+        //Speed up time relative to wherever the player is, then propagate the new dT
+        //to each room.
+        var player_dilation = player_station.dilation_rate;
+        var real_dt = this.real_dt = new Bacon.Bus();
+        if (params.update) this.real_dt.plug(params.update);
+        real_dt.onValue(function(dt){
+            var player_dilation = player_station.get("dilation_rate");
+            if (player_dilation > 0.0){
+                this.stations.each(function(station){
+                    var rdt = dt * station.get("dilation_rate") / player_dilation;
+                    station.stream("dt").push(rdt);
+                })
+            }
+        }.bind(this))
     }
     return Ship;
 });

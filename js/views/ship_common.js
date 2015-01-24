@@ -39,7 +39,7 @@ define(['underscore', 'backbone_streams','pixi',
                 group.addChild(label);
                 
                 this.ship[name].relative_time.onValue(function(rt){
-                    label.setText(rt);
+                    label.setText(Math.floor(rt)/1000);
                 })
                 
                 this.el.addChild(group);
