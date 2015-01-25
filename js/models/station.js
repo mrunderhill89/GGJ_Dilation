@@ -1,8 +1,10 @@
-define(['underscore','backbone_streams', 'collections/inbox'], function(_, Backbone, Inbox){
+define(['underscore','backbone_streams'], function(_, Backbone){
     var Station = Backbone.Model.extend({
         initialize: function(params){
             this.dilation_rate = this.stream("dilation_rate").toProperty(params.dilation_rate || this.get("dilation_rate"));
-            this.dilation_rate.onValue(function(dr){this.set("dilation_rate", dr)}.bind(this));
+            this.dilation_rate.onValue(function(dr){
+                this.set("dilation_rate", dr)
+            }.bind(this));
 
             this.relative_time = this.stream("dt").scan(0, function(t, dt){
                 if (!_.isNaN(dt))
@@ -12,15 +14,9 @@ define(['underscore','backbone_streams', 'collections/inbox'], function(_, Backb
             this.relative_time.onValue(function(rt){
                 this.set("relative_time", rt);
             }.bind(this));
-            
-            this.inbox = new Inbox();
-            if (params.messages){
-                _.each(params.messages, function(msg){
-                    this.inbox.create(msg);
-                }.bind(this));
-            }
         },
         defaults:{
+            name: "station",
             dilation_rate: 1.0,
             relative_time: 0.0,
             power: 1.0,

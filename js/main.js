@@ -43,6 +43,7 @@ require(['jquery', 'pixi', 'bacon',
         var chat_window = new ChatWindowView({
             el:"#chat_window",
             station: ship.command,
+            messenger: ship.messenger,
             update: dt
         }).render();
     //Set the main loop
