@@ -21,13 +21,13 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                 return function(ship){
                     if (ship[station].get("relative_time") > time) return true;
                     return false;
-                }
+                };
             },
             power_too_low: function(station, limit){
                 return function(ship){
                     if (ship[station].get("power") < limit) return true;
                     return false;
-                }
+                };
             },
         },
         actions: {
@@ -98,14 +98,14 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                                     from:"shields",
                                     to:"command",
                                     content:"Negative, Command. Shields can only be set from tiers 1-3."
-                                })
+                                });
                             }
                         } else {
                             ship.messenger.send({
                                 from:"shields",
                                 to:"command",
                                 content:"Sorry, Command. I need a shield tier number."
-                            })
+                            });
                         }
                     };
                 };
@@ -121,13 +121,13 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                                 from:station,
                                 to:"command",
                                 content: message
-                            })
+                            });
                             return Bacon.noMore;
-                        }
+                        };
                     });
                     station_model.stream("message").onValue(cancel);
                     return Bacon.noMore;
-                }
+                };
             },
             change_ship_position: function(view, x, y, r){
                 return function(ship){
@@ -135,7 +135,7 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                     ship.stream_y.push(y);
                     ship.stream_r.push(r);
                    return Bacon.noMore;
-                }
+                };
             }
         }
     });

@@ -30,7 +30,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 2000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"command",
@@ -40,17 +40,17 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 3000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"command",
                     received:3000.0,
-                    sent:9000.0,
+                    sent:0.0,
                     content:" MANUAL OVERRIDE ACTIVATED"
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 4000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"command",
@@ -60,7 +60,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 5000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"command",
@@ -70,7 +70,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 12000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"right_engine",
@@ -80,7 +80,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 18000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"left_engine",
@@ -90,7 +90,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 20500.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"sensors",
@@ -100,7 +100,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 25000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"sensors",
@@ -110,7 +110,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 30000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"sensors",
@@ -120,7 +120,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 32000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"sensors",
@@ -132,7 +132,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
             //60k Right Engine awaits response
             //65k Left Engine awaits orders
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 100000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"sensors",
@@ -149,7 +149,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
             //120k Right needs orders
             //140k Engine awaits orders
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 150000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"sensors",
@@ -159,7 +159,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 180000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"shields",
@@ -169,7 +169,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 190000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"shields",
@@ -179,7 +179,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 200000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"sensors",
@@ -189,7 +189,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 210000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"power_core",
@@ -199,7 +199,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 220000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"sensors",
@@ -211,7 +211,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
             //230k Left engine orders
             //240k Right engine orders
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 250000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"sensors",
@@ -221,7 +221,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 260000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"power_core",
@@ -233,7 +233,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
             //270k Left Engine Order
             //280k Right Engine Order
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 290000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"command",
@@ -243,7 +243,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
+                check: Response.conditions.time_passed("command", 300000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"command",
