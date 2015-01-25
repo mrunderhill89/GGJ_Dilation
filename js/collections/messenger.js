@@ -36,9 +36,9 @@ define(['backbone_streams','models/message'], function(Backbone, Message){
                 to:to,
                 content: params.content,
                 sent: params.sent,
-                received: params.sent + delay
+                received: params.received || (params.sent + delay)
             });
-            from.stream("message").push(message);
+            if (from !== to) from.stream("message").push(message);
         }
     });
     return Messenger;

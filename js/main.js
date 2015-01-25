@@ -21,9 +21,9 @@ require.config({
 });
 
 require(['jquery', 'pixi', 'bacon', 
-         'collections/ship',
+         'collections/ship','collections/script',
          'views/ship_common','views/chat_window'],
-    function($, Pixi, Bacon, Ship, ShipCommonView, ChatWindowView){
+    function($, Pixi, Bacon, Ship, Script, ShipCommonView, ChatWindowView){
 
     //Create a "real time" stream to pass time values to from the main loop.
         var real_time = new Bacon.Bus();
@@ -46,6 +46,11 @@ require(['jquery', 'pixi', 'bacon',
             messenger: ship.messenger,
             update: dt
         }).render();
+    //Set up the script object
+        var script = Script.default_script();
+        dt.onValue(function(dt){
+            script.stream("state").push(ship);
+        })
     //Set the main loop
         requestAnimFrame(main_loop);
         function main_loop(){

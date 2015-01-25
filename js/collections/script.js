@@ -183,17 +183,17 @@ define(['backbone_streams','models/response'], function(Backbone, Response){
         },
         update: function(ship){
             this.responses.each(function(rsp){
-                rps.stream("state").push(ship);
+                rsp.stream("state").push(ship);
             })
         }
     },{
-        default_script: function(){
-            var script = new Script();
+        default_script: function(params){
+            var script = new Script(params);
             script.responses.create({
                 check: Response.conditions.time_passed("command", 0.0),
                 apply: Response.actions.send_message({
                     to:"command",
-                    from:"",
+                    from:"command",
                     received:0.0,
                     sent:0.0,
                     content:" SYSTEM DAMAGED"
