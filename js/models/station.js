@@ -3,7 +3,7 @@ define(['underscore','backbone_streams'], function(_, Backbone){
         initialize: function(params){
             this.dilation_rate = this.stream("dilation_rate").toProperty(params.dilation_rate || this.get("dilation_rate"));
             this.dilation_rate.onValue(function(dr){
-                this.set("dilation_rate", dr)
+                this.set("dilation_rate", dr);
             }.bind(this));
 
             this.relative_time = this.stream("dt").scan(0, function(t, dt){

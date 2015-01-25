@@ -42,7 +42,7 @@ define(['underscore', 'backbone_streams','pixi',
             }
             this.sub_views = {
                 command: new CommandView({ship: this.ship})
-            }
+            };
             this.current_view = this.stream("current_view").scan(null, function(prev, name){
                 if (prev){
                     this.stage.removeChild(prev.el);
@@ -77,6 +77,7 @@ define(['underscore', 'backbone_streams','pixi',
                 this.ship[name].dilation_rate.onValue(function(dr){
                     //Red is constant, so reduce green and blue as dilation gets worse.
                     var value = Math.pow(dr,2.0);
+                    //var value = (300000 - dt)/300000; //A nice value between 0-1  that SHOULD help with displaying the changing color, but...
                     var color = rgbToHex(1.0, value,value);
                     box.clear();
                     box.beginFill(color);
