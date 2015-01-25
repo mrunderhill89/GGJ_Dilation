@@ -26,12 +26,15 @@ define(['backbone_streams','models/message'], function(Backbone, Message){
                 };
             }.bind(this));
         },
+        delay: function(from, to){
+            return (from.get("dilation_rate")/to.get("dilation_rate"))*1000.0;
+        },
         send: function(params){
             var from = this.ship[params.from];
             var to = this.ship[params.to];
             var sent = (params.sent || from.get("relative_time"));
-            var delay = (from.get("dilation_rate")/to.get("dilation_rate"))*1000.0;
-            var received = params.received || Math.max(sent + delay, to.get("relative_time"));
+            var delay = this.delay(from,to);
+            var received = params.received || Math.max(sent, to.get("relative_time")) + delay;
             var message = this.messages.create({
                 from: from,
                 to:to,

@@ -4,7 +4,8 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
         bg_size: {x: 100, y: 120},
         l_engine: {x:15, y:100},
         r_engine: {x:55, y:100},
-        bar_size: 30
+        bar_size: 30,
+        label: {x:350, y:330}
     };
     var CommandEngineView = Backbone.View.extend({
         initialize: function(params){
@@ -45,6 +46,11 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
                     positions.bar_size, 
                     -0.8 * p);
             });
+            
+            var label = new Pixi.Text("Engine Status", {font:"14px Arial", fill:"white"});
+            label.position.x = positions.label.x;
+            label.position.y = positions.label.y;
+            group.addChild(label);
         }        
     });
     return CommandEngineView;

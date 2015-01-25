@@ -1,5 +1,5 @@
-define(['jquery', 'backbone_streams', 'models/station', 'models/message'], function(
-      $, Backbone, Station, Message){
+define(['jquery', 'bacon', 'backbone_streams', 'models/station', 'models/message'], function(
+      $, Bacon, Backbone, Station, Message){
     var ChatWindowView = Backbone.View.extend({
         initialize: function(params){
             params || (params = {});
@@ -10,6 +10,12 @@ define(['jquery', 'backbone_streams', 'models/station', 'models/message'], funct
             var send_text = this.send_text = this.$el.find("#send_text");
             var send_button = this.send_button = this.$el.find("#send_button");
             var latency = this.latency = this.$el.find("#latency");
+            
+            var receiver_stream = receiver.asEventStream("change").map(".target.value"
+            ).toProperty("sensors");
+            receiver_stream.onValue(function(e){
+                latency.val(messenger.delay(this.station, messenger.ship[e]).toFixed(1)+"ms");
+            }.bind(this));
             
             message_box.empty();
             station.stream("message").onValue(function(msg){

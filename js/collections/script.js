@@ -235,7 +235,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             })
             script.responses.create({
-                check: Response.conditions.time_passed("command", 300000.0),
+                check: Response.conditions.time_passed("command", 305000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"command",

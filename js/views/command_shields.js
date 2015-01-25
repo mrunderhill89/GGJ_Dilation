@@ -6,7 +6,8 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
             1: 10,
             2: 25,
             3: 40
-        }
+        },
+        label: {x:470, y:330}
     };
     var CommandShieldView = Backbone.View.extend({
         initialize: function(params){
@@ -35,6 +36,11 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
                 var radius = positions.shield_sizes[p]
                 shield.drawEllipse(center.x, center.y, radius, radius);
             });
+            
+            var label = new Pixi.Text("Shield Status", {font:"14px Arial", fill:"white"});
+            label.position.x = positions.label.x;
+            label.position.y = positions.label.y;
+            group.addChild(label);
         }        
     });
     return CommandShieldView;
