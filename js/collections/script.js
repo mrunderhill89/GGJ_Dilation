@@ -149,7 +149,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                     from:"sensors",
                     received:150000.0,
                     sent:0.0,
-                    content:" Rogue piece of debris incoming! We won't be able to avoid this one! Use of shields advised, Tier 2!"
+                    content:" Rogue piece of debris incoming! We won't be able to avoid this one! Use of shields advised, Tier 2 or higher!"
                 })
             });
             script.responses.create({
@@ -260,7 +260,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
             });
             script.responses.create({
                 check: Response.conditions.time_passed("left_engine",10000.0),
-                apply: Response.actions.command_afk("left_engine", 25000.0, 
+                apply: Response.actions.command_afk("left_engine", 30000.0, 
                     "Command, are you still online? You've been pretty quiet.")
             });
             return script;

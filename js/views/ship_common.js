@@ -48,7 +48,6 @@ define(['underscore', 'backbone_streams','pixi',
                     this.stage.removeChild(prev.el);
                 }
                 var next = this.sub_views[name];
-                console.log(next);
                 if (next){
                     this.stage.addChild(next.el);
                 }
