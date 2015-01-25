@@ -4,6 +4,10 @@ define(['underscore', 'backbone_streams', 'bacon',
         model:Station, 
         url: '/', //Not using a server yet.
     });
+    function dilation(e_dt, dt){
+    	y = e_dt + dt^1.02 -208;
+    	return y;
+    }
     function Ship(params){
         params || (params = {});
         this.stations = new Stations({});
@@ -210,6 +214,8 @@ define(['underscore', 'backbone_streams', 'bacon',
                 this.stations.each(function(station){
                     var rdt = dt * station.get("dilation_rate") / player_dilation;
                     station.stream("dt").push(rdt);
+                    station.stream("dilation_rate").push(station.get("dilation_rate"))
+                    var nd = dilation(station.get("dilation_rate"), rdt)
                 });
             }
         }.bind(this));
