@@ -233,7 +233,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                     power_core: 1.0,
                     right_engine: 1.0,
                 })
-            })
+            });
             script.responses.create({
                 check: Response.conditions.time_passed("command", 300000.0),
                 apply: Response.actions.send_message({
