@@ -201,19 +201,11 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
             });
             script.responses.create({
                 check: _.constant(true),
-                apply: Response.actions.check_message("sensors", function(args){
-                    var msg = args[0], ship = args[1];
-                    if (msg.get("from").get("key") === "command"){
-                        if (msg.get("content").indexOf("hi") != -1){
-                            ship.messenger.send({
-                                from:"sensors",
-                                to:"command",
-                                content:"Hello, command."
-                            })
-                            return Bacon.noMore;
-                        }
-                    }
-                })
+                apply: Response.actions.engine_response("left_engine")
+            });
+            script.responses.create({
+                check: _.constant(true),
+                apply: Response.actions.engine_response("right_engine")
             });
             return script;
         }

@@ -38,6 +38,38 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                     .onValue(message_reader);
                     return Bacon.noMore;
                 };
+            },
+            engine_response: function(station){
+                var reader = function(args){
+                    var msg = args[0], ship = args[1];
+                    if (msg.get("from").get("key") === "command"){
+                        var content = msg.get("content");
+                        var matchNumber = content.match(/\d+/);
+                        if (matchNumber){
+                            var value = matchNumber[0];
+                            if (value >= 0.0 && value <= 100.0){
+                                ship.messenger.send({
+                                    from:station,
+                                    to:"command",
+                                    content:"Copy. Setting "+msg.get("to").get("name")+" to "+value+"%."
+                                })
+                            } else {
+                                ship.messenger.send({
+                                    from:station,
+                                    to:"command",
+                                    content:"Cannot comply, Command. She can only go from 0-100%, not "+value+"."
+                                })
+                            }
+                        } else {
+                            ship.messenger.send({
+                                from:station,
+                                to:"command",
+                                content:"Did not copy, Command. Please respond with engine values."
+                            })
+                        }
+                    };
+                };
+                return Response.actions.check_message(station, reader);
             }
         }
     });
