@@ -52,7 +52,7 @@ require(['jquery', 'pixi', 'bacon',
         });
         dt.onValue(function(dt){
             script.stream("state").push(ship);
-        })
+        });
     //Set the main loop
         requestAnimFrame(main_loop);
         function main_loop(){
