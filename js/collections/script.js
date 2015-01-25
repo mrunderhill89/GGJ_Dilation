@@ -128,26 +128,8 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                     content:" Advise we set left and right thrusters to 75% and 25%, respectively."
                 })
             });
-            script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
-                apply: Response.actions.send_message({
-                    to:"command",
-                    from:"right_engine",
-                    received:60000.0,
-                    sent:0.0,
-                    content:" Right away!"
-                })
-            });
-            script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
-                apply: Response.actions.send_message({
-                    to:"command",
-                    from:"left_engine",
-                    received:65000.0,
-                    sent:0.0,
-                    content:" Performing necesary callibrations now."
-                })
-            });
+            //60k Right Engine awaits response
+            //65k Left Engine awaits orders
             script.responses.create({
                 check: Response.conditions.time_passed("command", 0.0),
                 apply: Response.actions.send_message({
@@ -158,26 +140,8 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                     content:" We'll need to make another turn to avoid more debris. Advise we set thrusters to 60% and 40%."
                 })
             });
-            script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
-                apply: Response.actions.send_message({
-                    to:"command",
-                    from:"right_engine",
-                    received:120000.0,
-                    sent:0.0,
-                    content:" Orders recieved!"
-                })
-            });
-            script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
-                apply: Response.actions.send_message({
-                    to:"command",
-                    from:"right_engine",
-                    received:140000.0,
-                    sent:0.0,
-                    content:" Right thruster set to 40%!"
-                })
-            });
+            //120k Right needs orders
+            //140k Engine awaits orders
             script.responses.create({
                 check: Response.conditions.time_passed("command", 0.0),
                 apply: Response.actions.send_message({
@@ -238,16 +202,8 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                     content:" Advise we proceed with a straight course for 20 seconds."
                 })
             });
-            script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
-                apply: Response.actions.send_message({
-                    to:"command",
-                    from:"left_engine",
-                    received:230000.0,
-                    sent:0.0,
-                    content:" Normalizing thrust for straight course."
-                })
-            });
+            //230k Left engine orders
+            //240k Right engine orders
             script.responses.create({
                 check: Response.conditions.time_passed("command", 0.0),
                 apply: Response.actions.send_message({
@@ -268,26 +224,8 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                     content:" Diverting power from shields to engines."
                 })
             });
-            script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
-                apply: Response.actions.send_message({
-                    to:"command",
-                    from:"left_engine",
-                    received:270000.0,
-                    sent:0.0,
-                    content:" Maximizing thrust."
-                })
-            });
-            script.responses.create({
-                check: Response.conditions.time_passed("command", 0.0),
-                apply: Response.actions.send_message({
-                    to:"command",
-                    from:"right_engine",
-                    received:280000.0,
-                    sent:0.0,
-                    content:" Right Engine set to 100%"
-                })
-            });
+            //270k Left Engine Order
+            //280k Right Engine Order
             script.responses.create({
                 check: Response.conditions.time_passed("command", 0.0),
                 apply: Response.actions.send_message({

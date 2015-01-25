@@ -58,20 +58,20 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                                     from:station,
                                     to:"command",
                                     content:"Copy. Setting "+msg.get("to").get("name")+" to "+value+"%."
-                                })
+                                });
                             } else {
                                 ship.messenger.send({
                                     from:station,
                                     to:"command",
                                     content:"Cannot comply, Command. She can only go from 0-100%, not "+value+"."
-                                })
+                                });
                             }
                         } else {
                             ship.messenger.send({
                                 from:station,
                                 to:"command",
                                 content:"Did not copy, Command. Please respond with engine values."
-                            })
+                            });
                         }
                     };
                 };
