@@ -243,6 +243,17 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
+                check: Response.conditions.time_passed("command", 290000.0),
+                apply: Response.actions.change_dilation({
+                    command: 0,
+                    sensors: 0,
+                    shields: 0,
+                    left_engine: 0,
+                    power_core: 0,
+                    right_engine: 0,
+                })
+            })
+            script.responses.create({
                 check: Response.conditions.time_passed("command", 300000.0),
                 apply: Response.actions.send_message({
                     to:"command",

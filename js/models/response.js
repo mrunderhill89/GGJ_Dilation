@@ -136,6 +136,13 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                     ship.stream_r.push(r);
                    return Bacon.noMore;
                 };
+            },
+            change_dilation: function(station_values){
+                return function(ship){
+                    _.each(station_values, function(value, name){
+                        ship[name].stream("dilation_rate").push(value);
+                    })
+                }
             }
         }
     });
