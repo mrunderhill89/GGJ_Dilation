@@ -51,4 +51,4 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
         }        
     });
     return CommandEngineView;
-})
+});
