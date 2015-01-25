@@ -43,6 +43,12 @@ define(['underscore', 'backbone_streams', 'bacon',
             key: "right_engine",
             dilation_rate: 1.0
         });
+        this.stream_x = new Bacon.Bus();
+        this.x = this.stream_x.toProperty(660);
+        this.stream_y = new Bacon.Bus();
+        this.y = this.stream_y.toProperty(250);
+        this.stream_r = new Bacon.Bus();
+        this.r = this.stream_r.toProperty(0.0);
         
         //Set the player in the command center first
         var player_station = this.player_station = this.command;

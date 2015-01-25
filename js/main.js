@@ -47,7 +47,9 @@ require(['jquery', 'pixi', 'bacon',
             update: dt
         }).render();
     //Set up the script object
-        var script = Script.default_script();
+        var script = Script.default_script({
+            view: ship_view
+        });
         dt.onValue(function(dt){
             script.stream("state").push(ship);
         })

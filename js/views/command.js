@@ -1,5 +1,5 @@
-define(['underscore','backbone_streams', 'pixi'], function(Backbone, Pixi){
-    var CommandView = Backbone.view.extend({
+define(['underscore','backbone_streams', 'pixi', 'views/command_position'], function(_, Backbone, Pixi, CommandPositionView){
+    var CommandView = Backbone.View.extend({
         initialize: function(params){
             params || (params = {});
             var group = this.el = new Pixi.DisplayObjectContainer();
@@ -11,9 +11,6 @@ define(['underscore','backbone_streams', 'pixi'], function(Backbone, Pixi){
                 sub_view.render();
                 group.addChild(sub_view.el);
             })
-        },
-        render: function(){
-            return this;
         }
     });
     return CommandView;

@@ -21,13 +21,13 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                 return function(ship){
                     if (ship[station].get("relative_time") > time) return true;
                     return false;
-                }
+                };
             },
             power_too_low: function(station, limit){
                 return function(ship){
                     if (ship[station].get("power") < limit) return true;
                     return false;
-                }
+                };
             },
         },
         actions: {
@@ -59,6 +59,7 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                                     to:"command",
                                     content:"Copy. Setting "+msg.get("to").get("name")+" to "+value+"%."
                                 });
+                                ship[station].set("power", value);
                             } else {
                                 ship.messenger.send({
                                     from:station,
@@ -91,6 +92,7 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                                     to:"command",
                                     content:"Understood. Shields set to tier "+value+"."
                                 });
+                                ship["shields"].set("power", value);
                             } else {
                                 ship.messenger.send({
                                     from:"shields",
@@ -125,6 +127,14 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                     });
                     station_model.stream("message").onValue(cancel);
                     return Bacon.noMore;
+                };
+            },
+            change_ship_position: function(view, x, y, r){
+                return function(ship){
+                    ship.stream_x.push(x);
+                    ship.stream_y.push(y);
+                    ship.stream_r.push(r);
+                   return Bacon.noMore;
                 };
             }
         }

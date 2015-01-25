@@ -1,15 +1,17 @@
 define(['underscore', 'backbone_streams','pixi',
-        'collections/ship'], function(
+        'collections/ship',
+       'views/command'], function(
        _, Backbone, Pixi,
-        Ship
+        Ship,
+        CommandView
        ){
     var xy_pairings = {
-        command: {x: 75, y:225},
-        sensors: {x: 50, y: 275},
-        shields: {x:100, y: 275},
-        left_engine:{x:25,y:325},
-        power_core:{x:75,y:325},
-        right_engine:{x:125,y:325}
+        command: {x: 75, y:230},
+        sensors: {x: 50, y: 280},
+        shields: {x:100, y: 280},
+        left_engine:{x:25,y:330},
+        power_core:{x:75,y:330},
+        right_engine:{x:125,y:330}
     };
     var station_properties = {
         width: 50,
@@ -38,6 +40,21 @@ define(['underscore', 'backbone_streams','pixi',
             if (params.update){
                 this.stream("dt").plug(params.update);
             }
+            this.sub_views = {
+                command: new CommandView({ship: this.ship})
+            }
+            this.current_view = this.stream("current_view").scan(null, function(prev, name){
+                if (prev){
+                    this.stage.removeChild(prev.el);
+                }
+                var next = this.sub_views[name];
+                if (next){
+                    this.stage.addChild(next.el);
+                }
+                return next;
+            }.bind(this));
+            this.current_view.onValue();//Don't ask me why, but the stream won't work without this.
+            this.stream("current_view").push("command");
         },
         render: function(){
             this.sprites = _.map(xy_pairings, function(coords, name){
