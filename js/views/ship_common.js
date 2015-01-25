@@ -6,12 +6,12 @@ define(['underscore', 'backbone_streams','pixi',
         CommandView
        ){
     var xy_pairings = {
-        command: {x: 75, y:230},
-        sensors: {x: 50, y: 280},
-        shields: {x:100, y: 280},
-        left_engine:{x:25,y:330},
-        power_core:{x:75,y:330},
-        right_engine:{x:125,y:330}
+        command: {x: 141, y:320}, //75, 230
+        sensors: {x: 116, y: 370}, //20, 280
+        shields: {x:166, y: 370}, //100, 280
+        left_engine:{x:91,y:420}, //25, 330
+        power_core:{x:141,y:420}, //75, 330
+        right_engine:{x:191,y:420} //125, 330
     };
     var station_properties = {
         width: 50,
