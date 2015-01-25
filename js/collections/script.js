@@ -1,4 +1,4 @@
-define(['backbone_streams','models/response'], function(Backbone, Response){
+define(['underscore','bacon', 'backbone_streams','models/response'], function(_, Bacon, Backbone, Response){
     /*
         {
         from:"SYS_AI",
@@ -197,6 +197,22 @@ define(['backbone_streams','models/response'], function(Backbone, Response){
                     received:0.0,
                     sent:0.0,
                     content:" SYSTEM DAMAGED"
+                })
+            });
+            script.responses.create({
+                check: _.constant(true),
+                apply: Response.actions.check_message("sensors", function(args){
+                    var msg = args[0], ship = args[1];
+                    if (msg.get("from").get("key") === "command"){
+                        if (msg.get("content").indexOf("hi") != -1){
+                            ship.messenger.send({
+                                from:"sensors",
+                                to:"command",
+                                content:"Hello, command."
+                            })
+                            return Bacon.noMore;
+                        }
+                    }
                 })
             });
             return script;

@@ -14,8 +14,14 @@ define(['jquery', 'backbone_streams', 'models/station', 'models/message'], funct
             message_box.empty();
             station.stream("message").onValue(function(msg){
                 if (msg.get("content")){
+                        var label;
+                        if (msg.get("from") === msg.get("to")){
+                            label = msg.get("from").get("name");
+                        } else {
+                            label = msg.get("from").get("name")+"->"+msg.get("to").get("name");
+                        }
                         message_box.append(
-                            msg.get("from").get("name")+"->"+msg.get("to").get("name")
+                            label
                             +" @("+(Math.floor(msg.get("sent"))/1000).toFixed(4)+"):\n "
                             +msg.get("content")+"\n");
                         message_box.scrollTop(message_box[0].scrollHeight);                    
