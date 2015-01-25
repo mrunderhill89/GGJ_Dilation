@@ -30,6 +30,7 @@ define(['jquery', 'backbone_streams', 'models/station'], function(
                     var content = msg.get("content");
                     if (content){
                         message_box.append(msg.get("from")+" @("+(Math.floor(msg.get("received"))/1000).toFixed(4)+"):\n"+msg.get("content")+"\n");
+                        message_box.scrollTop(message_box[0].scrollHeight);
                     }
                 })
             })
