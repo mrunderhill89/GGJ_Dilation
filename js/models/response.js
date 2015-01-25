@@ -90,20 +90,20 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                                     from:"shields",
                                     to:"command",
                                     content:"Understood. Shields set to tier "+value+"."
-                                })
+                                });
                             } else {
                                 ship.messenger.send({
                                     from:"shields",
                                     to:"command",
                                     content:"Negative, Command. Shields can only be set from tiers 1-3."
-                                })
+                                });
                             }
                         } else {
                             ship.messenger.send({
                                 from:"shields",
                                 to:"command",
                                 content:"Sorry, Command. I need a shield tier number."
-                            })
+                            });
                         }
                     };
                 };
@@ -119,13 +119,13 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                                 from:station,
                                 to:"command",
                                 content: message
-                            })
+                            });
                             return Bacon.noMore;
-                        }
+                        };
                     });
                     station_model.stream("message").onValue(cancel);
                     return Bacon.noMore;
-                }
+                };
             }
         }
     });
