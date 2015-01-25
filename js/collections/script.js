@@ -158,26 +158,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                     content:" Rogue piece of debris incoming! We won't be able to avoid this one! Use of shields advised, Tier 2 or higher!"
                 })
             });
-            script.responses.create({
-                check: Response.conditions.time_passed("command", 180000.0),
-                apply: Response.actions.send_message({
-                    to:"command",
-                    from:"shields",
-                    received:180000.0,
-                    sent:0.0,
-                    content:" Shields online, setting to Tier 2!"
-                })
-            });
-            script.responses.create({
-                check: Response.conditions.time_passed("command", 190000.0),
-                apply: Response.actions.send_message({
-                    to:"command",
-                    from:"shields",
-                    received:190000.0,
-                    sent:0.0,
-                    content:" Shields intact, damage is minimal."
-                })
-            });
+            //180k Shields
             script.responses.create({
                 check: Response.conditions.time_passed("command", 200000.0),
                 apply: Response.actions.send_message({
