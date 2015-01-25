@@ -1,5 +1,5 @@
-define(['jquery', 'backbone_streams', 'models/station'], function(
-      $, Backbone, Station){
+define(['jquery', 'backbone_streams', 'models/station', 'models/message'], function(
+      $, Backbone, Station, Message){
     var ChatWindowView = Backbone.View.extend({
         initialize: function(params){
             params || (params = {});
@@ -29,11 +29,21 @@ define(['jquery', 'backbone_streams', 'models/station'], function(
                 _.each(messages, function(msg){
                     var content = msg.get("content");
                     if (content){
-                        message_box.append(msg.get("from")+" @("+(Math.floor(msg.get("received"))/1000).toFixed(4)+"):\n"+msg.get("content")+"\n");
+                        message_box.append(msg.get("from")+" @("+(Math.floor(msg.get("received"))/1000).toFixed(4)+"):\n "+msg.get("content")+"\n");
                         message_box.scrollTop(message_box[0].scrollHeight);
                     }
                 })
             })
+            
+            send_button.click(function(e){
+                var new_message = new Message({
+                    from: "Command",
+                    received: station.get("relative_time"),
+                    content: send_text.val()
+                });
+                this.stream("reveal").push(new_message);
+                send_text.val("");
+            }.bind(this));
         },
         render: function(){
         }

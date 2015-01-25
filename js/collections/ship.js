@@ -16,16 +16,19 @@ define(['underscore', 'backbone_streams', 'bacon',
                {
                	from:"SYS_AI",
                	received:0.0,
+                sent:0.0,
                	content:" SYSTEM DAMAGED"
                },
                {
                	from:"SYS_AI",
                	received:2000.0,
+                sent:2000.0,
                	content:" AUTOPILOT UNABLE TO ENGAGE"
                },
                {
                	from:"SYS_AI",
                	received:3000.0,
+                sent:3000.0,
                	content:" MANUAL OVERRIDE ACTIVATED"
                },
                {
