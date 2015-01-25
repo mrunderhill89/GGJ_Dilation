@@ -142,6 +142,14 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                     _.each(station_values, function(value, name){
                         ship[name].stream("dilation_rate").push(value);
                     })
+                    return Bacon.noMore;
+                }
+            },
+            stop_timer: function(){
+                return function(ship){
+                    console.log(ship.real_dt);
+                    ship.real_dt.unsubAll();
+                    return Bacon.noMore;
                 }
             }
         }

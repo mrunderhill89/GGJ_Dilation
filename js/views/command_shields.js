@@ -11,7 +11,6 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
     var CommandShieldView = Backbone.View.extend({
         initialize: function(params){
             params || (params = {});
-            console.log("Command Shields Init");
             this.el = new Pixi.DisplayObjectContainer();
             this.ship = params.ship || new Ship(params);
         },
@@ -35,7 +34,6 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
                 shield.lineStyle(p*2, 0x0000FF);
                 var radius = positions.shield_sizes[p]
                 shield.drawEllipse(center.x, center.y, radius, radius);
-                console.log(shield);
             });
         }        
     });

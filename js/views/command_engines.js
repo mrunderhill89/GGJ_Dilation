@@ -9,7 +9,6 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
     var CommandEngineView = Backbone.View.extend({
         initialize: function(params){
             params || (params = {});
-            console.log("Command Engines Init");
             this.el = new Pixi.DisplayObjectContainer();
             this.ship = params.ship || new Ship(params);
         },
@@ -26,7 +25,6 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
             group.addChild(right_engine);
             
             this.ship["left_engine"].power.onValue(function(p){
-                console.log(p);
                 left_engine.clear();
                 left_engine.beginFill(0x0000FF);
                 left_engine.lineStyle(3, 0xFFFFFF);
@@ -38,7 +36,6 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
             });
             
             this.ship["right_engine"].power.onValue(function(p){
-                console.log(p);
                 right_engine.clear();
                 right_engine.beginFill(0x0000FF);
                 right_engine.lineStyle(3, 0xFFFFFF);

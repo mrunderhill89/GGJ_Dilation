@@ -245,12 +245,12 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
             script.responses.create({
                 check: Response.conditions.time_passed("command", 290000.0),
                 apply: Response.actions.change_dilation({
-                    command: 0,
-                    sensors: 0,
-                    shields: 0,
-                    left_engine: 0,
-                    power_core: 0,
-                    right_engine: 0,
+                    command: 1.0,
+                    sensors: 1.0,
+                    shields: 1.0,
+                    left_engine: 1.0,
+                    power_core: 1.0,
+                    right_engine: 1.0,
                 })
             })
             script.responses.create({
@@ -262,6 +262,10 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                     sent:0.0,
                     content:" EXECUTING SOS PROTOCOLS"
                 })
+            });
+            script.responses.create({
+                check: Response.conditions.time_passed("command",300000.0),
+                apply: Response.actions.stop_timer()
             });
             script.responses.create({
                 check: _.constant(true),

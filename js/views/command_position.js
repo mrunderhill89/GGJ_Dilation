@@ -14,12 +14,10 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
     var CommandPositionView = Backbone.View.extend({
         initialize: function(params){
             params || (params = {});
-            console.log("Command Position Init");
             this.el = new Pixi.DisplayObjectContainer();
             this.ship = params.ship || new Ship(params);
         },
         render: function(){
-            console.log("Command Position Render");
             var group = this.el;
             var bg = new Pixi.Graphics();
             bg.beginFill(0x000000);
