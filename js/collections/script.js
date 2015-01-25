@@ -316,6 +316,15 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 check: _.constant(true),
                 apply: Response.actions.engine_response("right_engine")
             });
+            script.responses.create({
+                check: _.constant(true),
+                apply: Response.actions.shield_response()
+            });
+            script.responses.create({
+                check: Response.conditions.time_passed("left_engine",10000.0),
+                apply: Response.actions.command_afk("left_engine", 25000.0, 
+                    "Command, are you still online? You've been pretty quiet.")
+            });
             return script;
         }
     });

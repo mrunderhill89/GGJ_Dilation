@@ -23,6 +23,12 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                     return false;
                 }
             },
+            power_too_low: function(station, limit){
+                return function(ship){
+                    if (ship[station].get("power") < limit) return true;
+                    return false;
+                }
+            },
         },
         actions: {
             send_message: function(params){
@@ -70,6 +76,56 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                     };
                 };
                 return Response.actions.check_message(station, reader);
+            },
+            shield_response: function(){
+                var reader = function(args){
+                    var msg = args[0], ship = args[1];
+                    if (msg.get("from").get("key") === "command"){
+                        var content = msg.get("content");
+                        var matchNumber = content.match(/\d+/);
+                        if (matchNumber){
+                            var value = matchNumber[0];
+                            if (value >= 1.0 && value <= 3.0){
+                                ship.messenger.send({
+                                    from:"shields",
+                                    to:"command",
+                                    content:"Understood. Shields set to tier "+value+"."
+                                })
+                            } else {
+                                ship.messenger.send({
+                                    from:"shields",
+                                    to:"command",
+                                    content:"Negative, Command. Shields can only be set from tiers 1-3."
+                                })
+                            }
+                        } else {
+                            ship.messenger.send({
+                                from:"shields",
+                                to:"command",
+                                content:"Sorry, Command. I need a shield tier number."
+                            })
+                        }
+                    };
+                };
+                return Response.actions.check_message("shields", reader);
+            },
+            command_afk: function(station, limit, message){
+                return function(ship){
+                    var station_model = ship[station];
+                    var trigger_time = station_model.get("relative_time")+limit;
+                    var cancel = station_model.relative_time.onValue(function(t){
+                        if (t > trigger_time){
+                            ship.messenger.send({
+                                from:station,
+                                to:"command",
+                                content: message
+                            })
+                            return Bacon.noMore;
+                        }
+                    });
+                    station_model.stream("message").onValue(cancel);
+                    return Bacon.noMore;
+                }
             }
         }
     });
