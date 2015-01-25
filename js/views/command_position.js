@@ -8,6 +8,7 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
         ship_path: [10.0,0.0,
                     0.0,-20.0,
                     -10.0,0.0,
+                    0.0,-5.0,
                    10.0, 0.0]
     }
     var CommandPositionView = Backbone.View.extend({
@@ -39,9 +40,15 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
             this.stream("ship_x").toProperty(positions.ship_initial.x).onValue(function(x){
                 ship_icon.position.x = x;
             })
+            this.stream("ship_x").plug(this.ship.stream_x);
             this.stream("ship_y").toProperty(positions.ship_initial.y).onValue(function(y){
                 ship_icon.position.y = y;
             })
+            this.stream("ship_y").plug(this.ship.stream_y);
+            this.stream("ship_r").toProperty(0.0).onValue(function(r){
+                ship_icon.rotation = r;
+            })
+            this.stream("ship_r").plug(this.ship.stream_r);
             group.addChild(bg);
             group.addChild(ship_icon);
         }

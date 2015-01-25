@@ -128,6 +128,14 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                     station_model.stream("message").onValue(cancel);
                     return Bacon.noMore;
                 }
+            },
+            change_ship_position: function(view, x, y, r){
+                return function(ship){
+                    ship.stream_x.push(x);
+                    ship.stream_y.push(y);
+                    ship.stream_r.push(r);
+                   return Bacon.noMore;
+                }
             }
         }
     });

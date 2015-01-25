@@ -3,12 +3,13 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
         model: Response
     });
     var Script = Backbone.View.extend({
-        initialize: function(){
+        initialize: function(params){
             var responses = this.responses =  new ResponseList;
             responses.on("add", function(model){
                 console.log("Script.add:"+model);
             });
             this.stream("state").onValue(this.update.bind(this));
+            this.view = params.view;
         },
         update: function(ship){
             this.responses.each(function(rsp){
@@ -140,6 +141,11 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                     content:" We'll need to make another turn to avoid more debris. Advise we set thrusters to 60% and 40%."
                 })
             });
+            script.responses.create({
+                check: Response.conditions.time_passed("command", 100000.0),
+                apply: Response.actions.change_ship_position(this.view, 660, 230, 1.0)
+            });
+
             //120k Right needs orders
             //140k Engine awaits orders
             script.responses.create({
