@@ -47,9 +47,9 @@ define(['underscore', 'backbone_streams', 'bacon',
             power: 0.0,
         });
         this.stream_x = new Bacon.Bus();
-        this.x = this.stream_x.toProperty(660);
+        this.x = this.stream_x.toProperty(120);
         this.stream_y = new Bacon.Bus();
-        this.y = this.stream_y.toProperty(250);
+        this.y = this.stream_y.toProperty(87);
         this.stream_r = new Bacon.Bus();
         this.r = this.stream_r.toProperty(0.0);
         

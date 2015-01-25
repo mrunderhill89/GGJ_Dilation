@@ -1,10 +1,9 @@
 define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
     var positions = {
-        background: {x:350, y: 13},
+        background: {x:330, y: 13},
         bg_size: {x: 400, y: 300},
         disc_size: {x: 150, y:150},
         eh_size: {x:80, y:80},
-        ship_initial: {x:660, y:250},
         ship_path: [10.0,0.0,
                     0.0,-20.0,
                     -10.0,0.0,
@@ -28,6 +27,8 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
                 x: positions.background.x + (positions.bg_size.x/2),
                 y: positions.background.y + (positions.bg_size.y/2)
             }
+            console.log(center.x);
+            console.log(center.y);
             bg.drawEllipse(center.x, center.y, positions.disc_size.x, positions.disc_size.y);
             bg.lineStyle(5, 0xFF0000);
             bg.drawEllipse(center.x, center.y, positions.eh_size.x, positions.eh_size.y);
@@ -35,14 +36,14 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
             var ship_icon = new Pixi.Graphics();
             ship_icon.lineStyle(5, 0xFFFFFF);
             ship_icon.drawPolygon(positions.ship_path);
-            this.stream("ship_x").toProperty(positions.ship_initial.x).onValue(function(x){
-                ship_icon.position.x = x;
+            this.stream("ship_x").onValue(function(x){
+                ship_icon.position.x = center.x + x;
             })
-            this.stream("ship_x").plug(this.ship.stream_x);
-            this.stream("ship_y").toProperty(positions.ship_initial.y).onValue(function(y){
-                ship_icon.position.y = y;
+            this.stream("ship_x").plug(this.ship.x);
+            this.stream("ship_y").onValue(function(y){
+                ship_icon.position.y = center.y + y;
             })
-            this.stream("ship_y").plug(this.ship.stream_y);
+            this.stream("ship_y").plug(this.ship.y);
             this.stream("ship_r").toProperty(0.0).onValue(function(r){
                 ship_icon.rotation = r;
             })

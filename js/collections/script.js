@@ -142,8 +142,8 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 100000.0),
-                apply: Response.actions.change_ship_position(this.view, 660, 230, 1.0)
+                check: Response.conditions.time_passed("command", 1.0),
+                apply: Response.actions.change_ship_position(this.view, 120, 70, 1.0)
             });
 
             //120k Right needs orders
