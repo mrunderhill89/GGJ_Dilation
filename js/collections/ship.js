@@ -26,7 +26,8 @@ define(['underscore', 'backbone_streams', 'bacon',
         this.shields = this.stations.create({
             name: "Shields",
             key: "shields",
-            dilation_rate: 0.8
+            dilation_rate: 0.8,
+            power: 1.0,
         });
         this.power_core = this.stations.create({
             name: "Power Core",
@@ -36,12 +37,14 @@ define(['underscore', 'backbone_streams', 'bacon',
         this.left_engine = this.stations.create({
             name: "Left Engine",
             key: "left_engine",
-            dilation_rate: 0.6
+            dilation_rate: 0.6,
+            power: 0.0,
         });
         this.right_engine = this.stations.create({
             name: "Right Engine",
             key: "right_engine",
-            dilation_rate: 1.0
+            dilation_rate: 1.0,
+            power: 0.0,
         });
         this.stream_x = new Bacon.Bus();
         this.x = this.stream_x.toProperty(660);

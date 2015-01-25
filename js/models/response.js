@@ -59,7 +59,7 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                                     to:"command",
                                     content:"Copy. Setting "+msg.get("to").get("name")+" to "+value+"%."
                                 });
-                                ship[station].set("power", value);
+                                ship[station].stream("power").push(value);
                             } else {
                                 ship.messenger.send({
                                     from:station,
@@ -92,7 +92,7 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                                     to:"command",
                                     content:"Understood. Shields set to tier "+value+"."
                                 })
-                                ship["shields"].set("power", value);
+                                ship["shields"].stream("power").push(value);
                             } else {
                                 ship.messenger.send({
                                     from:"shields",

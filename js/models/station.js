@@ -14,6 +14,10 @@ define(['underscore','backbone_streams'], function(_, Backbone){
             this.relative_time.onValue(function(rt){
                 this.set("relative_time", rt);
             }.bind(this));
+            this.power = this.stream("power").scan(this.get("power"), function(op, np){
+                return np;
+            });
+            this.power.onValue(function(p){this.set("power", p);}.bind(this));
         },
         defaults:{
             name: "station",
