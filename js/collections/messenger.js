@@ -29,14 +29,15 @@ define(['backbone_streams','models/message'], function(Backbone, Message){
         send: function(params){
             var from = this.ship[params.from];
             var to = this.ship[params.to];
-            var received = Math.max(params.sent, to.get("relative_time"))
+            var sent = (params.sent || from.get("relative_time"));
             var delay = (from.get("dilation_rate")/to.get("dilation_rate"))*1000.0;
+            var received = params.received || Math.max(sent + delay, to.get("relative_time"));
             var message = this.messages.create({
                 from: from,
                 to:to,
                 content: params.content,
-                sent: params.sent,
-                received: params.received || (params.sent + delay)
+                sent: sent,
+                received: received
             });
             if (from !== to) from.stream("message").push(message);
         }
