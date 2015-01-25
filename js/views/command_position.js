@@ -27,8 +27,6 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
                 x: positions.background.x + (positions.bg_size.x/2),
                 y: positions.background.y + (positions.bg_size.y/2)
             }
-            console.log(center.x);
-            console.log(center.y);
             bg.drawEllipse(center.x, center.y, positions.disc_size.x, positions.disc_size.y);
             bg.lineStyle(5, 0xFF0000);
             bg.drawEllipse(center.x, center.y, positions.eh_size.x, positions.eh_size.y);

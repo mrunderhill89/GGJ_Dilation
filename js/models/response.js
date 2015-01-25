@@ -129,7 +129,7 @@ define(['backbone_streams','bacon'], function(Backbone, Bacon){
                     return Bacon.noMore;
                 };
             },
-            change_ship_position: function(view, x, y, r){
+            change_ship_position: function(x, y, r){
                 return function(ship){
                     ship.stream_x.push(x);
                     ship.stream_y.push(y);

@@ -143,7 +143,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
             });
             script.responses.create({
                 check: Response.conditions.time_passed("command", 100000.0),
-                apply: Response.actions.change_ship_position(this.view, 120, 70, 1.0)
+                apply: Response.actions.change_ship_position(120, 70, 1.0)
             });
 
             //120k Right needs orders
@@ -235,7 +235,11 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command", 305000.0),
+                check: Response.conditions.time_passed("command",300000.0),
+                apply: Response.actions.change_ship_position(150, 50, 1.5707)
+            });
+            script.responses.create({
+                check: Response.conditions.time_passed("command", 300000.0),
                 apply: Response.actions.send_message({
                     to:"command",
                     from:"command",
@@ -245,7 +249,7 @@ define(['underscore','bacon', 'backbone_streams','models/response'], function(_,
                 })
             });
             script.responses.create({
-                check: Response.conditions.time_passed("command",300000.0),
+                check: Response.conditions.time_passed("command",305000.0),
                 apply: Response.actions.stop_timer()
             });
             script.responses.create({
