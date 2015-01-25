@@ -1,4 +1,4 @@
-define(['underscore','backbone_streams', 'pixi', 'views/command_position', 'views/command_engines'], function(_, Backbone, Pixi, CommandPositionView, CommandEngineView){
+define(['underscore','backbone_streams', 'pixi', 'views/command_position', 'views/command_engines','views/command_shields'], function(_, Backbone, Pixi, CommandPositionView, CommandEngineView, CommandShieldView){
     var CommandView = Backbone.View.extend({
         initialize: function(params){
             params || (params = {});
@@ -6,7 +6,8 @@ define(['underscore','backbone_streams', 'pixi', 'views/command_position', 'view
             this.ship = params.ship || new Ship(params);
             var sub_views = this.sub_views = {
                 position: new CommandPositionView(params),
-                engines: new CommandEngineView(params)
+                engines: new CommandEngineView(params),
+                shields: new CommandShieldView(params)
             }
             _.each(sub_views, function(sub_view){
                 sub_view.render();

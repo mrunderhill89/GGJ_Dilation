@@ -21,24 +21,27 @@ define(['backbone_streams', 'pixi'], function(Backbone, Pixi){
             bg.drawRect(positions.background.x, positions.background.y, positions.bg_size.x, positions.bg_size.y);
             group.addChild(bg);
             var left_engine = new Pixi.Graphics();
-            left_engine.beginFill(0x0000FF);
-            left_engine.lineStyle(3, 0xFFFFFF);
             group.addChild(left_engine);
             var right_engine = new Pixi.Graphics();
-            right_engine.beginFill(0x0000FF);
-            right_engine.lineStyle(3, 0xFFFFFF);
             group.addChild(right_engine);
+            
             this.ship["left_engine"].power.onValue(function(p){
                 console.log(p);
                 left_engine.clear();
+                left_engine.beginFill(0x0000FF);
+                left_engine.lineStyle(3, 0xFFFFFF);
                 left_engine.drawRect(
                     positions.background.x + positions.l_engine.x, 
                     positions.background.y + positions.l_engine.y, 
                     positions.bar_size, 
                     -0.8 * p);
             });
+            
             this.ship["right_engine"].power.onValue(function(p){
+                console.log(p);
                 right_engine.clear();
+                right_engine.beginFill(0x0000FF);
+                right_engine.lineStyle(3, 0xFFFFFF);
                 right_engine.drawRect(
                     positions.background.x + positions.r_engine.x, 
                     positions.background.y + positions.r_engine.y, 
