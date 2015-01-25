@@ -2,6 +2,7 @@ define(['backbone_streams'], function(Backbone){
     var Message = Backbone.Model.extend({
         defaults:{
             from: "CATS",
+            to:"Command",
             received: 0.0,
             change_view: null
         },

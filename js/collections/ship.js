@@ -12,7 +12,6 @@ define(['underscore', 'backbone_streams', 'bacon',
         this.command = this.stations.create({
             dilation_rate: 0.7,
             messages:[
-            
                {
                	from:"SYS_AI",
                	received:0.0,
